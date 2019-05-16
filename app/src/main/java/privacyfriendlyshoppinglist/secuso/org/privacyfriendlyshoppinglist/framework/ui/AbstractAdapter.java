@@ -10,11 +10,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 17.03.17 creation date
- */
 public abstract class AbstractAdapter<Item extends AbstractItem, Cache extends PFACache, ViewHolder extends AbstractViewHolder>
         extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {

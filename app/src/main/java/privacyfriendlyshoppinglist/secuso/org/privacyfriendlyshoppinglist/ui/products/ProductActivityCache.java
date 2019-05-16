@@ -19,11 +19,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.set
 
 import java.util.ArrayList;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 20.07.16 creation date
- */
 public class ProductActivityCache extends PFACache
 {
     private AppCompatActivity activity;
@@ -31,7 +26,6 @@ public class ProductActivityCache extends PFACache
     private ProductsAdapter productsAdapter;
     private TextView totalAmountTextView;
     private TextView totalCheckedTextView;
-    private TextView currencyTextView;
     private LinearLayout totalLayout;
     private RecyclerView recyclerView;
     private String listId;
@@ -60,7 +54,6 @@ public class ProductActivityCache extends PFACache
         totalAmountTextView = (TextView) activity.findViewById(R.id.textview_total_amount);
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
-        currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
         noProductsLayout = (LinearLayout) activity.findViewById(R.id.no_products_layout);
         searchTextInputLayout = (TextInputLayout) activity.findViewById(R.id.search_input_layout);
         searchAutoCompleteTextView = (AutoCompleteTextView) activity.findViewById(R.id.search_input_text);
@@ -70,7 +63,6 @@ public class ProductActivityCache extends PFACache
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String defaultCurrency = activity.getResources().getString(R.string.currency);
         String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, defaultCurrency);
-        currencyTextView.setText(currency);
 
         recyclerView.addOnScrollListener(new FabScrollListenerForCreateActivities(newListFab));
     }

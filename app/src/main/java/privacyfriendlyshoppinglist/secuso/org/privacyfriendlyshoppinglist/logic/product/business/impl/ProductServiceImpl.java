@@ -18,7 +18,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.NumberScale;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -33,11 +32,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 17.07.16 creation date
- */
 public class ProductServiceImpl implements ProductService
 {
     private static final String IMAGE_DIR_NAME = "imageDir";
@@ -403,32 +397,11 @@ public class ProductServiceImpl implements ProductService
             totalItem.setEqualsZero(true);
         }
 
-        NumberScale numberScale = getNumberScale(totalAmount);
-        totalAmount = totalAmount / numberScale.getValue(context);
-        checkedAmount = checkedAmount / numberScale.getValue(context);
-
         String totalAmountString = converterService.getDoubleAsString(totalAmount);
         String checkedAmountString = converterService.getDoubleAsString(checkedAmount);
-        totalItem.setTotalAmount(totalAmountString + StringUtils.SPACE + numberScale.getAbbreviation(context));
-        totalItem.setCheckedAmount(checkedAmountString + StringUtils.SPACE + numberScale.getAbbreviation(context));
         totalItem.setNrProducts(nrProducts);
 
         return totalItem;
-    }
-
-    private NumberScale getNumberScale(double value)
-    {
-        NumberScale numberScale = NumberScale.NO_SCALE;
-        if ( value > NumberScale.MILLION.getValue(context) )
-        {
-            numberScale = NumberScale.MILLION;
-        }
-        // use kilo scale if value greatuer than 100,000.00
-        else if ( value > NumberScale.KILO.getValue(context) * 100 )
-        {
-            numberScale = NumberScale.KILO;
-        }
-        return numberScale;
     }
 
     @Override

@@ -3,11 +3,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 21.07.16 creation date
- */
 public class TotalItem
 {
     private static final String DETAIL_SEPARATOR = ": ";

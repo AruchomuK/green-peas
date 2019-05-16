@@ -8,11 +8,6 @@ import rx.Observable;
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
 public interface ProductService extends ContextSetter
 {
     Observable<Void> saveOrUpdate(ProductItem item, String listId);

@@ -18,8 +18,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.ui.AbstractViewHolder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.EditDeleteProductDialog;
@@ -34,7 +32,6 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
 {
     private ProductItemCache productItemCache;
     private ProductService productService;
-    private StatisticsService statisticsService;
 
     public ProductsItemViewHolder(final View parent, ProductActivityCache cache)
     {
@@ -42,7 +39,6 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
         this.productItemCache = new ProductItemCache(parent);
         AbstractInstanceFactory instanceFactory = new InstanceFactory(this.cache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-        this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
     }
 
@@ -76,20 +72,6 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
             productItemCache.getProductImageInDetail().setImageBitmap(null);
         }
 
-        productItemCache.getProductImageInDetail().setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent viewPhotoIntent = new Intent(cache.getActivity(), PhotoPreviewActivity.class);
-                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
-                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
-                viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, false);
-                ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                activity.startActivityForResult(viewPhotoIntent, ProductsActivity.REQUEST_PHOTO_PREVIEW_FROM_ITEM);
-            }
-        });
-
         updateVisibilityFormat(item);
 
         checkbox.setOnClickListener(new View.OnClickListener()
@@ -100,11 +82,6 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
                 item.setChecked(checkbox.isChecked());
                 productService.saveOrUpdate(item, cache.getListId())
                         .doOnError(Throwable::printStackTrace).subscribe();
-                if ( checkbox.isChecked() && cache.getStatisticsEnabled() )
-                {
-                    statisticsService.saveRecord(item)
-                            .doOnError(Throwable::printStackTrace).subscribe();
-                }
 
                 ProductsActivity host = (ProductsActivity) cache.getActivity();
                 host.updateTotals();

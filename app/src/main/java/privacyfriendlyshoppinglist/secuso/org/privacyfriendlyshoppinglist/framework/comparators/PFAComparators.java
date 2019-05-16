@@ -1,10 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 22.07.16 creation date
- */
 public abstract class PFAComparators
 {
     public static final String SORT_BY_NAME = "sort.by.name";

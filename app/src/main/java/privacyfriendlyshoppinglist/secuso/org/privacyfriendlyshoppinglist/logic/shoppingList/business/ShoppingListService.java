@@ -9,11 +9,6 @@ import rx.Observable;
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
 public interface ShoppingListService extends ContextSetter
 {
     Observable<Void> saveOrUpdate(ListItem item);

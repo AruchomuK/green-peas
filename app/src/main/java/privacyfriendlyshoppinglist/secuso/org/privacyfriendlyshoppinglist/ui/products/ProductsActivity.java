@@ -29,11 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 09.07.16 creation date
- */
 public class ProductsActivity extends AppCompatActivity
 {
     public static final String PRODUCT_ID_KEY = "product.id";
@@ -110,16 +105,6 @@ public class ProductsActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_ITEM && resultCode == RESULT_OK )
-        {
-            updateListView();
-        }
-    }
-
-    @Override
     protected void onRestart()
     {
         super.onRestart();
@@ -148,7 +133,6 @@ public class ProductsActivity extends AppCompatActivity
                     menusVisible = !allProducts.isEmpty();
                     invalidateOptionsMenu();
 
-                    // sort according to last sort selection
                     final ListItem[] listItem = new ListItem[ 1 ];
                     shoppingListService.getById(listId)
                             .doOnNext(item -> listItem[ 0 ] = item)
@@ -196,16 +180,9 @@ public class ProductsActivity extends AppCompatActivity
         cache.getTotalAmountTextView().setText(totalItem.getTotalAmount());
         cache.getTotalCheckedTextView().setText(totalItem.getCheckedAmount());
 
-        if ( totalItem.isEqualsZero() )
-        {
-            cache.getTotalLayout().animate().alpha(0.0f).translationY(100).setDuration(DURATION);
-            cache.getTotalLayout().setVisibility(View.GONE);
-        }
-        else
-        {
             cache.getTotalLayout().setVisibility(View.VISIBLE);
             cache.getTotalLayout().animate().alpha(1.0f).translationY(0).setDuration(DURATION);
-        }
+
     }
 
     public void changeItemPosition(ProductItem item)

@@ -8,11 +8,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 16.05.16 creation date
- */
 public abstract class AbstractDao<T extends AbstractEntity> implements ContextSetter
 {
     private static final String SUCCESSFUL = "successful";
@@ -36,7 +31,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         try
         {
             @SuppressWarnings("unchecked")
-            Dao<T, Long> dao = database.getDao((Class) entity.getClass());
+            Dao<T, Long> dao = database.getDao((Class<T>) entity.getClass());
             dao.createOrUpdate(entity);
             PFALogger.debug(getClass().getName(), SAVE_OR_UPDATE, SUCCESSFUL);
             return entity.getId();

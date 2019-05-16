@@ -6,11 +6,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 10.06.16 creation date
- */
 public class ShoppingListDaoImpl extends AbstractDao<ShoppingListEntity> implements ShoppingListDao
 {
     @Override

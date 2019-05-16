@@ -8,11 +8,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 
 import java.util.Date;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 09.06.16 creation date
- */
 public class ShoppingListEntity extends AbstractEntity
 {
     @DatabaseField(canBeNull = false)

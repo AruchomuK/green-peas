@@ -10,17 +10,12 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 16.05.16 15:35 creation date
- */
+
 class DataBaseHelper extends OrmLiteSqliteOpenHelper
 {
     private static final String ON_CREATE = "onCreate";
@@ -36,11 +31,9 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
 
     private void setupClasses()
     {
-        // SETUP_PERSISTENCE: add all Entity clases to this list
         entityClasses = new ArrayList<>();
         entityClasses.add(ProductItemEntity.class);
         entityClasses.add(ShoppingListEntity.class);
-        entityClasses.add(StatisticEntryEntity.class);
     }
 
     @Override
@@ -81,11 +74,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
 
     private static class DataBaseConfig extends OrmLiteConfigUtil
     {
-        // SETUP_PERSISTENCE: run every time the DB schema changes
 
-        /**
-         * Run Configuration: make sure to set "privacy-friendly-shopping-list/app/src/main" as Working directory
-         */
         public static void main(String[] args) throws Exception
         {
             writeConfigFile(ORMLITE_CONFIG_TXT);

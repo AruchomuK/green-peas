@@ -2,11 +2,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 
 import com.j256.ormlite.field.DatabaseField;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 16.05.16 15:06 creation date
- */
 public abstract class AbstractEntity
 {
     @DatabaseField(generatedId = true)

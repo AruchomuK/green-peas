@@ -38,8 +38,7 @@
                         app:errorEnabled="true"
                         android:id="@+id/list_name_input_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/imageview_statistics">
+                        android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                             android:id="@+id/list_name"
                             android:inputType="text|textCapSentences"

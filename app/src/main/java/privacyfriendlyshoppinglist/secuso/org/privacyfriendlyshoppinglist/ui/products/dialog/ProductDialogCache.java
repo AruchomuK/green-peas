@@ -6,11 +6,6 @@ import android.view.View;
 import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 30.07.16 creation date
- */
 public class ProductDialogCache
 {
 
@@ -29,8 +24,6 @@ public class ProductDialogCache
     private Button buttonMinus;
     private CheckBox productCheckBox;
 
-    private ImageView cameraIcon;
-    private ImageView productImage;
     private TextView titleTextView;
     private TextInputLayout productNameInputLayout;
     private TextInputLayout productPriceInputLayout;
@@ -50,8 +43,6 @@ public class ProductDialogCache
         productCheckBox = (CheckBox) rootview.findViewById(R.id.product_checkbox);
         expandableLayout = (LinearLayout) rootview.findViewById(R.id.expandable_product_view);
         expandableImageView = (ImageView) rootview.findViewById(R.id.expand_button);
-        cameraIcon = (ImageView) rootview.findViewById(R.id.camera_button);
-        productImage = (ImageView) rootview.findViewById(R.id.image_view);
         titleTextView = (TextView) rootview.findViewById(R.id.dialog_title);
     }
 
@@ -120,15 +111,6 @@ public class ProductDialogCache
         this.imageScheduledForDeletion = imageScheduledForDeletion;
     }
 
-    public ImageView getCameraIcon()
-    {
-        return cameraIcon;
-    }
-
-    public ImageView getProductImage()
-    {
-        return productImage;
-    }
 
     public TextView getTitleTextView()
     {

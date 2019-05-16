@@ -350,13 +350,13 @@
     <string name="no_products">This list does not contain any products.</string>
     <string name="share_as_text">Share as Text</string>
     <string-array
-            name="shopping_list_priority_spinner">
+        name="shopping_list_priority_spinner">
         <item>High</item>
         <item>Normal</item>
         <item>Priority</item>
     </string-array>
     <string-array
-            name="shopping_list_reminder_spinner">
+        name="shopping_list_reminder_spinner">
         <item>Minutes</item>
         <item>Hours</item>
         <item>Days</item>

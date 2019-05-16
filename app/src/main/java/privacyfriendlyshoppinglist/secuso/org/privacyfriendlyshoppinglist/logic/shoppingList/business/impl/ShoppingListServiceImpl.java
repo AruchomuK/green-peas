@@ -23,11 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
 public class ShoppingListServiceImpl implements ShoppingListService
 {
 

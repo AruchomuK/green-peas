@@ -33,31 +33,15 @@
             android:layout_height="match_parent"
             android:textStyle="bold"/>
 
-    <TextView
-            android:gravity="center_vertical"
-            android:text="@string/total_amount_separator"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/textview_total_amount"
             android:gravity="center_vertical"
-            android:text="@string/ph_total_amount"
+            android:text="@string/total_amount"
             android:textColor="@color/white"
             android:paddingLeft="@dimen/total_padding"
             android:paddingRight="@dimen/text_space_padding"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textStyle="bold"/>
-    <TextView
-            android:id="@+id/textview_currency"
-            android:text="@string/currency"
-            android:layout_weight="0.25"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 </LinearLayout>

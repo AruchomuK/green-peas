@@ -3,11 +3,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 18.05.16 creation date
- */
 public class InstanceFactoryForTests extends AbstractInstanceFactory
 {
 

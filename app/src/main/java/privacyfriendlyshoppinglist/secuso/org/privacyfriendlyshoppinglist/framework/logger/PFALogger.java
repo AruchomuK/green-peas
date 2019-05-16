@@ -2,11 +2,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 
 import android.util.Log;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 31.05.16 creation date
- */
 public abstract class PFALogger
 {
     public static void debug(String className, String methodName, String result)

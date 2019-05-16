@@ -33,7 +33,6 @@ public class ProductItemCache
         checkbox = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
         productCard = (CardView) parent.findViewById(R.id.cardview_item);
         showDetailsImageButton = (ImageButton) parent.findViewById(R.id.expand_button_list);
-        productImageInViewer = (ImageView) parent.findViewById(R.id.product_image_in_viewer);
         productImageInDetail = (ImageView) parent.findViewById(R.id.product_image_in_detail);
         listDetailsTextView = (TextView) parent.findViewById(R.id.textview_list_details);
         detailsLayout = (RelativeLayout) parent.findViewById(R.id.layout_details);
@@ -83,11 +82,6 @@ public class ProductItemCache
     public TextView getListDetailsTextView()
     {
         return listDetailsTextView;
-    }
-
-    public ImageView getProductImageInViewer()
-    {
-        return productImageInViewer;
     }
 
     public ImageView getProductImageInDetail()

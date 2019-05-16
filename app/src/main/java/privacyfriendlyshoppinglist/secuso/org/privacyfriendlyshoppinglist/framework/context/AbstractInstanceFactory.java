@@ -5,11 +5,6 @@ import dagger.ObjectGraph;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.AppContextModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
 public abstract class AbstractInstanceFactory
 {
     private static Context context;

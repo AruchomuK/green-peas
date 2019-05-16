@@ -12,11 +12,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 17.07.16 creation date
- */
 public class ProductConverterServiceImpl implements ProductConverterService
 {
     private static final int DEFAULT_QUANTITY = 1;

@@ -18,12 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.about.AboutActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.help.HelpActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.StatisticsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.tutorial.TutorialActivity;
+
 
 /**
  * Created by Chris on 04.07.2016.
@@ -166,24 +163,6 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
                 intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                break;
-            case R.id.nav_statistics:
-                intent = new Intent(this, StatisticsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
-            case R.id.nav_about:
-                intent = new Intent(this, AboutActivity.class);
-                createBackStack(intent);
-                break;
-            case R.id.nav_help:
-                intent = new Intent(this, HelpActivity.class);
-                createBackStack(intent);
-                break;
-            case R.id.nav_tutorial:
-                intent = new Intent(this, TutorialActivity.class);
-                intent.setAction(TutorialActivity.ACTION_SHOW_ANYWAYS);
-                createBackStack(intent);
                 break;
             case R.id.nav_settings:
                 intent = new Intent(this, SettingsActivity.class);

@@ -110,35 +110,15 @@ public class ListDialogFragment extends DialogFragment
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
         dialogCache = new ListDialogCache(v);
 
-        dialogCache.getStatisticsSwitch().setChecked(item.isStatisticEnabled());
-
-        dialogCache.getStatisticsSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if ( dialogCache.getStatisticsSwitch().isChecked() )
-                {
-                    MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_LONG);
-                }
-                else
-                {
-                    MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT);
-                }
-            }
-        });
-
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_edit));
-            dialogCache.getStatisticsSwitch().setChecked(item.isStatisticEnabled());
         }
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_new));
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cache.getActivity());
             boolean statisticsEnabled = sharedPreferences.getBoolean(SettingsKeys.STATISTICS_ENABLED, false);
-            dialogCache.getStatisticsSwitch().setChecked(statisticsEnabled);
         }
 
         if ( !StringUtils.isEmpty(item.getDeadlineDate()) )
@@ -377,7 +357,6 @@ public class ListDialogFragment extends DialogFragment
                 item.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
                 item.setReminderCount(dialogCache.getReminderText().getText().toString());
                 item.setReminderEnabled(reminderSwitch.isChecked());
-                item.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
                 String message = getResources().getString(R.string.notification_message, item.getListName(), item.getDeadlineDate() + " " + item.getDeadlineTime());
 

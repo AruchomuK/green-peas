@@ -29,9 +29,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera.CameraActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
@@ -49,9 +46,6 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ProductDialogFragment extends DialogFragment
 {
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
-    private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
     private static final double MAX_PRICE_ALLOWED = 10000000;
     public static final String DEFAULT_QUANTITY = "1";
 
@@ -65,7 +59,6 @@ public class ProductDialogFragment extends DialogFragment
     private ProductActivityCache cache;
 
     private ProductService productService;
-    private StatisticsService statisticsService;
 
     public static ProductDialogFragment newEditDialogInstance(ProductItem item, ProductActivityCache cache)
     {
@@ -135,7 +128,6 @@ public class ProductDialogFragment extends DialogFragment
     {
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-        this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
@@ -154,16 +146,10 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getProductCheckBox().setChecked(item.isChecked());
 
         PackageManager pm = getContext().getPackageManager();
-        if ( !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) )
-        {
-            dialogCache.getCameraIcon().setVisibility(View.GONE);
-            dialogCache.getProductImage().setVisibility(View.GONE);
-        }
 
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
-            dialogCache.getProductImage().setImageBitmap(item.getThumbnailBitmap());
             dialogCache.getProductCheckBox().setVisibility(View.VISIBLE);
         }
         else
@@ -171,7 +157,6 @@ public class ProductDialogFragment extends DialogFragment
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
             item.setDefaultImage(true);
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
-            dialogCache.getProductImage().setImageBitmap(bitmap);
             dialogCache.getProductCheckBox().setVisibility(View.GONE);
         }
 
@@ -235,28 +220,6 @@ public class ProductDialogFragment extends DialogFragment
             }
         });
 
-
-        dialogCache.getCameraIcon().setOnClickListener(new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick(View view)
-            {
-                int permissionCheck = ContextCompat.checkSelfPermission(cache.getActivity(), Manifest.permission.CAMERA);
-
-                if ( permissionCheck == PackageManager.PERMISSION_GRANTED )
-                {
-                    startImageCaptureAction();
-                }
-                else
-                {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_USE_CAMERA);
-                }
-
-            }
-
-        });
-
         dialogCache.getPrice().setFilters(new InputFilter[]{new PriceInputFilter(dialogCache)});
 
 
@@ -280,19 +243,6 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
-
-        dialogCache.getProductImage().setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if ( !item.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
-                {
-                    startPhotoPreviewActivity();
-                }
-            }
-        });
-
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
 
@@ -332,11 +282,6 @@ public class ProductDialogFragment extends DialogFragment
                 {
                     saveConfirmed = true;
                     saveUserInput(productName);
-                    if ( item.isChecked() && cache.getStatisticsEnabled() )
-                    {
-                        statisticsService.saveRecord(item)
-                                .doOnError(Throwable::printStackTrace).subscribe();
-                    }
                     productService.saveOrUpdate(item, cache.getListId())
                             .doOnCompleted(() ->
                             {
@@ -428,15 +373,6 @@ public class ProductDialogFragment extends DialogFragment
         return dialog;
     }
 
-    private void startPhotoPreviewActivity()
-    {
-        Intent viewPhotoIntent = new Intent(cache.getActivity(), PhotoPreviewActivity.class);
-        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
-        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
-        viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, true);
-        this.startActivityForResult(viewPhotoIntent, REQUEST_PHOTO_PREVIEW_FROM_DIALOG);
-    }
-
     private void changePhotoThumbnailVisibility(int ic_keyboard_arrow_up_white_48sp, int visible)
     {
         dialogCache.getExpandableImageView().setImageResource(ic_keyboard_arrow_up_white_48sp);
@@ -463,47 +399,6 @@ public class ProductDialogFragment extends DialogFragment
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
-        {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get(CameraActivity.THUMBNAIL_KEY);
-
-            dialogCache.getProductImage().setImageBitmap(imageBitmap);
-            item.setThumbnailBitmap(imageBitmap);
-            item.setDefaultImage(false);
-            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
-        }
-        else if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_DIALOG && resultCode == RESULT_OK )
-        {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get(ProductsActivity.PHOTO_BITMAP);
-
-            dialogCache.getProductImage().setImageBitmap(imageBitmap);
-            dialogCache.setImageScheduledForDeletion(true);
-            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
-        switch ( requestCode )
-        {
-            case MY_PERMISSIONS_REQUEST_USE_CAMERA:
-            {
-                if ( grantResults.length > 0
-                        && grantResults[ 0 ] == PackageManager.PERMISSION_GRANTED )
-                {
-                    startImageCaptureAction();
-                }
-                return;
-            }
-        }
-    }
-
     private void startImageCaptureAction()
     {
         // item must be saved first in order to have an id.
@@ -514,18 +409,10 @@ public class ProductDialogFragment extends DialogFragment
             String newProductName = getResources().getString(R.string.new_product);
             productName = newProductName;
         }
-        boolean newProductAdded = item.getId() == null;
-        resetState = true && newProductAdded;
         saveUserInput(productName);
         productService.saveOrUpdate(item, cache.getListId())
                 .doOnError(Throwable::printStackTrace).subscribe();
         saveConfirmed = false;
-
-        dialogCache.setImageScheduledForDeletion(false);
-        Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);
-        takePictureIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
-        takePictureIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
-        this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     }
 
     private void setupAutoCompleteLists(AutoCompleteLists autoCompleteLists)

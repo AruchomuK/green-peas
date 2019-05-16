@@ -27,11 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 17.05.16 creation date
- */
 public class MainActivity extends BaseActivity
 {
     public static final String LIST_ID_KEY = "list.id";
@@ -53,8 +48,6 @@ public class MainActivity extends BaseActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListActivityCache(this);
         menusVisible = false;
-
-//        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();
 
@@ -130,7 +123,6 @@ public class MainActivity extends BaseActivity
                     menusVisible = !allListItems.isEmpty();
                     invalidateOptionsMenu();
 
-                    // sort according to last sort selection
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                     String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
                     boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);

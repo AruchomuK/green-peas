@@ -5,11 +5,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
 public interface ProductItemDao extends ContextSetter
 {
     Long save(ProductItemEntity entity);

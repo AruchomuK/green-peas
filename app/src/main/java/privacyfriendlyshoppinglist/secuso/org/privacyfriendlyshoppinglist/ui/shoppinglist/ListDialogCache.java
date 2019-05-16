@@ -7,11 +7,6 @@ import android.view.View;
 import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 30.07.16 creation date
- */
 public class ListDialogCache
 {
     private TextInputEditText listNameText;
@@ -28,7 +23,6 @@ public class ListDialogCache
     private Spinner prioritySpinner;
     private Spinner reminderSpinner;
     private TextView titleTextView;
-    private SwitchCompat statisticsSwitch;
     private SwitchCompat reminderSwitch;
     private TextInputLayout listNameInputLayout;
 
@@ -49,7 +43,6 @@ public class ListDialogCache
         dateTextView = (TextView) rootview.findViewById(R.id.date_view);
         timeTextView = (TextView) rootview.findViewById(R.id.time_view);
         titleTextView = (TextView) rootview.findViewById(R.id.dialog_title);
-        statisticsSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_statistics);
         reminderSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_reminder);
     }
 
@@ -123,10 +116,6 @@ public class ListDialogCache
         return reminderText;
     }
 
-    public SwitchCompat getStatisticsSwitch()
-    {
-        return statisticsSwitch;
-    }
 
     public SwitchCompat getReminderSwitch()
     {

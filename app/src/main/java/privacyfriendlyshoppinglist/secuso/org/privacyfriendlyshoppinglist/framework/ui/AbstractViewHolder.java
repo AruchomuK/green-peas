@@ -5,11 +5,6 @@ import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.PFACache;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 17.03.17 creation date
- */
 public abstract class AbstractViewHolder<Item extends AbstractItem, Cache extends PFACache> extends RecyclerView.ViewHolder
 {
     protected Cache cache;

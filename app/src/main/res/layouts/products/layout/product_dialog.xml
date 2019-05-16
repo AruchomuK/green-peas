@@ -227,23 +227,6 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                        <ImageButton
-                                android:layout_width="50sp"
-                                android:layout_height="50sp"
-                                android:padding="10sp"
-                                android:scaleType="fitCenter"
-                                android:background="?android:selectableItemBackground"
-                                android:tint="@color/colorAccent"
-                                android:src="@drawable/ic_camera_alt_white_48sp"
-                                android:id="@+id/camera_button"
-                                android:layout_gravity="right"/>
-
-                        <ImageView
-                                android:src="@android:drawable/ic_menu_camera"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/image_view"/>
-
                     </LinearLayout>
 
                 </LinearLayout>

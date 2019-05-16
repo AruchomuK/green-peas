@@ -11,13 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.util.Date;
-
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
- */
-public class ShoppingListConverterImpl implements ShoppingListConverter
+public class ShoppingListConverterImpl extends DateUtils implements ShoppingListConverter
 {
     private static final String SPACE = " ";
 

@@ -10,13 +10,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.impl.ShoppingListDaoImpl;
 
-import javax.inject.Singleton;
-
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 05.06.16 creation date
- */
 @Module(
         injects = {
                 ShoppingListDao.class,
@@ -28,21 +21,18 @@ public class ShoppingListModule implements AppModule
 {
 
     @Provides
-    @Singleton
     ShoppingListDao provideShoppingListDao()
     {
         return new ShoppingListDaoImpl();
     }
 
     @Provides
-    @Singleton
     ShoppingListConverter provideShoppingListConverter()
     {
         return new ShoppingListConverterImpl();
     }
 
     @Provides
-    @Singleton
     ShoppingListService provideShoppingListService(
             ShoppingListDao shoppingListDao,
             ShoppingListConverter shoppingListConverter

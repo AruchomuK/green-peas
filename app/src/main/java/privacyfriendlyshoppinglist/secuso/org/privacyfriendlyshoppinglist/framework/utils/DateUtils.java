@@ -6,11 +6,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Locale;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 22.06.16 creation date
- */
 public abstract class DateUtils
 {
     public static final String ISO_PATTERN_MIN = "yyyy-MM-dd HH:mm";
@@ -86,3 +81,4 @@ public abstract class DateUtils
         return outputFormatter.print(date);
     }
 }
+

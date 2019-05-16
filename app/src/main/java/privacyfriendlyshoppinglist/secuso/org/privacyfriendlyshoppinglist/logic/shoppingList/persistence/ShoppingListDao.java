@@ -5,11 +5,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 
 import java.util.List;
 
-/**
- * Description:
- * Author: Grebiel Jose Ifill Brito
- * Created: 09.06.16 creation date
- */
 public interface ShoppingListDao extends ContextSetter
 {
     Long save(ShoppingListEntity entity);
